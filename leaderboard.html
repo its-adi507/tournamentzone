@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leaderboard</title>
+    <link rel="stylesheet" href="./CSS/leaderboard.css">
+</head>
+<body>
+    <div class="main">
+        <div class="time-selection">
+            <div class="time-select" id="weekly">Weekly</div>
+            <div class="time-select" id="lifetime">leaderboard</div>
+        </div>
+        <div class="lbl-container">
+            <p class="position-lbl">Position</p>
+            <p class="score-lbl">Score</p>
+        </div>
+        <div id="leaderboard-container">
+            
+            <div class="player-card">
+                <div  class="player-position">1</div>
+                <div class="player-name">1020871391</div>
+                <div class="player-score">154</div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+
+    <script>
+        function createLeaderboard(){
+            let container = document.getElementById('leaderboard-container');
+            let newHTML = '';
+            for (let index = 0; index < 1000; index++) {
+                let ps = index+1;
+                newHTML += `<div class="player-card">
+                <div class="player-position">${ps}</div>
+                <div class="player-name">1020871391</div>
+                <div class="player-score">154</div>
+            </div>`;
+                
+            }
+            container.innerHTML = newHTML;
+        }
+        createLeaderboard();
+    </script>
+</body>
+</html> 

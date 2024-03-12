@@ -1,0 +1,133 @@
+.dialog {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .dialog-content {
+    background-color: white;
+    width: 80%;
+    border-radius: 2px;
+    padding: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  #dialog-match-title{
+    margin: 5px 0px;
+  }
+  .id-pass-container{
+    width: fit-content;
+    margin: 5px 50px;
+  }
+  .room-id-container{
+    margin-bottom: 10px;
+  }
+  .lbl{
+    padding-left: 10px;
+  }
+  #room-id-copy-btn,#room-pass-copy-btn{
+    height: 15px;
+    width: 15px;
+    margin-left: 20px;
+    border-radius: 2px;
+    background-image: url(../assets/copy.png);
+    background-size: cover;
+    background-position: center;
+    border: none;
+    cursor: pointer;
+  }
+  #room-id-copy-btn:active{
+    background-color: rgb(205, 198, 198);
+  }
+  #room-pass-copy-btn:active{
+    background-color: rgb(205, 198, 198);
+  }
+  #room-id-lbl{
+    font-weight:200;
+    margin-left: 29px;
+  }
+  #room-pass-lbl{
+    font-weight:200;
+    margin-left: 19px;
+  }
+
+
+
+
+
+
+
+
+
+  .dialog2 {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  
+  .dialog-content2 {
+    background-color: white;
+    width: 80%;
+    border-radius: 2px;
+    padding: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .uid-dialog-title{
+    margin: 5px 0px;
+  }
+  .uid-input{
+    width: 200px;
+    height: 20px;
+    background-color:transparent;
+    border-radius: 5px;
+    border-color:rgb(192, 187, 187);
+    text-align: center;
+    margin: 3px 0px;
+  }
+.uid-input:focus{
+  outline:none;
+}
+.uid-submit-btn{
+  height: 35px;
+  width: 80px;
+  margin-top: 5px;
+  border: none;
+  border-radius: 5px;
+  background-color:rgb(44, 208, 44);
+  cursor: pointer;
+  box-shadow: 2px 2px 5px green;
+}
+.uid-submit-btn:hover{
+  background-color:rgb(48, 234, 48);
+}
+.uid-submit-btn:active{
+  background-color:rgb(18, 192, 18);
+}
+.uid-input::-webkit-inner-spin-button,
+.uid-input::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+}
+#uid-dialog-error{
+  color: red;
+}

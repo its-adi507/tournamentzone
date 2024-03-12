@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile</title>
+    <link rel="stylesheet" href="./CSS/profile.css">
+</head>
+<body>
+    <div id="main">
+        <div id="first-div">
+            <div id="profile-img-container">
+                <img id="profile-img" src="./assets/hero-banner.png" alt="">
+            </div>
+            <div id="profile-details-container">
+                <button id="p-edit">edit</button>
+                <p id="p-name">Aditya sharma</p>
+                <div id="p-user-id-container">
+                    <p class="u-i-lbl">ID :</p>
+                    <p class="u-i-lbl" id="p-user-id">4512963258</p>
+                    <img class="u-i-lbl" src="./assets/copy.png" alt="" id="p-user-id-copy-btn">
+                </div>
+                <div id="p-lvl-container">
+                    <p class="p-lvl-lbl">level :</p>
+                    <p class="p-lvl-lbl" id="user-lvl">25</p>
+                </div>
+            </div>
+        </div>
+        
+        <div id="p-stat-container">
+            <select name="stat-selection" id="stat-type-selection">
+                <option value="overall">Overall</option>
+                <option value="freefire">Free Fire</option>
+                <option value="bgmi">Bgmi</option>
+                <option value="farlight84">Farlight 84</option>
+            </select>
+            <div id="all-stat-container">
+                <div id="overall-stat-container">
+                    <div class="stat-lbl-container">
+                        <p class="stat-lbl">Matches</p>
+                        <p class="stat-value" id="match-count-value">194482</p>
+                    </div>
+                    <div class="stat-lbl-container">
+                        <p class="stat-lbl">Booyah</p>
+                        <p class="stat-value" id="booyah-count-value">54410</p>
+                    </div>
+                    <div class="stat-lbl-container">
+                        <p class="stat-lbl">Kills</p>
+                        <p class="stat-value" id="kill-count-value">20864</p>
+                    </div>
+                    <div class="stat-lbl-container">
+                        <p class="stat-lbl">Headshots</p>
+                        <p class="stat-value" id="headshot-count-value">1460</p>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+</html>
