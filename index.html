@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Matches</title>
     <link rel="stylesheet" href="../CSS/index.css" />
-    <link rel="stylesheet" href="./CSS/dialog.css">
-    <link rel="stylesheet" href="./CSS/leaderboard.css">
+    <link rel="stylesheet" href="./CSS/dialog.css" />
+    <link rel="stylesheet" href="./CSS/leaderboard.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -20,44 +20,73 @@
         <p id="dialog-match-title">ROOM ID & PASSWORD</p>
         <div class="id-pass-container">
           <div class="room-id-container">
-            <label class="lbl">ID </label><label id="room-id-lbl">1234567893</label><button id="room-id-copy-btn"></button>
+            <label class="lbl">ID </label
+            ><label id="room-id-lbl">1234567893</label
+            ><button id="room-id-copy-btn"></button>
           </div>
           <div class="room-pass-container">
-            <label>PASS </label><label id="room-pass-lbl">1234567893</label><button id="room-pass-copy-btn"></button>
+            <label>PASS </label><label id="room-pass-lbl">1234567893</label
+            ><button id="room-pass-copy-btn"></button>
           </div>
         </div>
       </div>
     </div>
-    <div id="customDialog2"  class="dialog2">
+    <div id="customDialog2" class="dialog2">
       <div class="dialog-content2">
         <p class="uid-dialog-title">ENTER YOUR GAME UID.</p>
-        <input class="uid-input" id="uid-input1" placeholder="UID 1" type="number" inputmode="numeric">
-        <input class="uid-input" id="uid-input2" placeholder="UID 2" type="number" inputmode="numeric">
-        <input class="uid-input" id="uid-input3" placeholder="UID 3" type="number" inputmode="numeric">
-        <input class="uid-input" id="uid-input4" placeholder="UID 4" type="number" inputmode="numeric">
+        <input
+          class="uid-input"
+          id="uid-input1"
+          placeholder="UID 1"
+          type="number"
+          inputmode="numeric"
+        />
+        <input
+          class="uid-input"
+          id="uid-input2"
+          placeholder="UID 2"
+          type="number"
+          inputmode="numeric"
+        />
+        <input
+          class="uid-input"
+          id="uid-input3"
+          placeholder="UID 3"
+          type="number"
+          inputmode="numeric"
+        />
+        <input
+          class="uid-input"
+          id="uid-input4"
+          placeholder="UID 4"
+          type="number"
+          inputmode="numeric"
+        />
         <button class="uid-submit-btn">Submit</button>
         <p id="uid-dialog-error"></p>
       </div>
     </div>
     <button id="clickbtn">click</button>
     <div class="div-container">
-      <div class="main" id="mainDiv">
-      </div>
+      <div class="main" id="mainDiv"></div>
 
       <div id="match-detail">
-        <button onclick="document.getElementById('match-detail').style.display = 'none'; document.getElementById('mainDiv').style.display = 'block';">click</button>
-        
-      <div class="lbl-container">
+        <button
+          onclick="document.getElementById('match-detail').style.display = 'none'; document.getElementById('mainDiv').style.display = 'block';"
+        >
+          click
+        </button>
+
+        <div class="lbl-container">
           <p class="position-lbl">Participants</p>
-      </div>
-      <div id="participant-container">
-          
+        </div>
+        <div id="participant-container">
           <div class="player-card">
-              <div class="player-position">1</div>
-              <div class="player-name">1020871391</div>
-              <div class="player-score">154</div>
+            <div class="player-position">1</div>
+            <div class="player-name">1020871391</div>
+            <div class="player-score">154</div>
           </div>
-      </div>
+        </div>
       </div>
     </div>
 
@@ -88,25 +117,25 @@
       const db = getDatabase();
       const upcomingMatchRef = ref(db, "upcomingMatch");
       let containerElement = document.querySelector(".main");
-      localStorage.setItem('Tmatch', 'not defined');
-      localStorage.setItem('matchD', 0);
-      let email = 'adityasharma7270@gmail:com';
+      localStorage.setItem("Tmatch", "not defined");
+      localStorage.setItem("matchD", 0);
+      let email = "adityasharma7270@gmail:com";
       console.log(email);
       let TcrntMJoinedList;
 
       let tagdata;
-      localStorage.setItem('mdc', 'false');
+      localStorage.setItem("mdc", "false");
 
       function calltag() {
-        document.getElementById('clickbtn').style.display = 'none';
+        document.getElementById("clickbtn").style.display = "none";
 
         get(upcomingMatchRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
               tagdata = Object.keys(snapshot.val());
               let matchlength = tagdata.length;
-              localStorage.setItem('Tmatch', matchlength);
-              
+              localStorage.setItem("Tmatch", matchlength);
+
               callData();
             } else {
               console.log('No data found in the "upcomingMatch" node.');
@@ -121,391 +150,391 @@
         const dbRef = ref(db);
 
         tagdata.forEach((item) => {
-          get(child(dbRef, "upcomingMatch/" + item))
-            .then((snapshot) => {
-              if (snapshot.exists()) {
-                const newMatch = {
-                  
-                  id: item,
-                  banner_img: snapshot.val().bannerImg,
-                  logo_img: snapshot.val().logoImg,
-                  title: snapshot.val().title,
-                  date: snapshot.val().date,
-                  Time: snapshot.val().time,
-                  reward: Number(snapshot.val().reward),
-                  perkill: Number(snapshot.val().perkill),
-                  entryfee: Number(snapshot.val().entryfee),
-                  map: snapshot.val().map,
-                  type: snapshot.val().type,
-                  mode: snapshot.val().mode,
-                  userJoined: Number(snapshot.val().joineduser),
-                  userAllowed: Number(snapshot.val().alloweduser),
-                };
-                create(newMatch);
-                matchData.push(newMatch);
-              }
-            })
+          get(child(dbRef, "upcomingMatch/" + item)).then((snapshot) => {
+            if (snapshot.exists()) {
+              const newMatch = {
+                id: item,
+                banner_img: snapshot.val().bannerImg,
+                logo_img: snapshot.val().logoImg,
+                title: snapshot.val().title,
+                date: snapshot.val().date,
+                Time: snapshot.val().time,
+                reward: Number(snapshot.val().reward),
+                perkill: Number(snapshot.val().perkill),
+                entryfee: Number(snapshot.val().entryfee),
+                map: snapshot.val().map,
+                type: snapshot.val().type,
+                mode: snapshot.val().mode,
+                userJoined: Number(snapshot.val().joineduser),
+                userAllowed: Number(snapshot.val().alloweduser),
+              };
+              create(newMatch);
+              matchData.push(newMatch);
+            }
+          });
         });
         console.log(tagdata);
         console.log(matchData);
-        
-        
       }
       
-      document.getElementById("clickbtn").addEventListener("click", calltag);
+      // document.getElementById("clickbtn").addEventListener("click", calltag);
 
-// live fetching user joined data -------------------------------------------------------
+      // live fetching user joined data -------------------------------------------------------
 
+      function livefetch(match) {
+        let elementId = `${match}-uj`;
+        let elementId2 = `${match}-pb`;
+        let elementId3 = `${match}-ua`;
 
-function livefetch(match) {
-    let elementId = `${match}-uj`;
-    let elementId2 = `${match}-pb`;
-    let elementId3 = `${match}-ua`;
-    
-    let pbElement = document.getElementById(elementId2);
-    let spanElement = document.getElementById(elementId);
-    const userJoinedRef = ref(db, `upcomingMatch/${match}/joineduser`);
-    let userAlwd = document.getElementById(elementId3).innerText;
+        let pbElement = document.getElementById(elementId2);
+        let spanElement = document.getElementById(elementId);
+        const userJoinedRef = ref(db, `upcomingMatch/${match}/joineduser`);
+        let userAlwd = document.getElementById(elementId3).innerText;
 
-    onValue(userJoinedRef, (snapshot) => {
-        if (snapshot.exists()) {
+        onValue(userJoinedRef, (snapshot) => {
+          if (snapshot.exists()) {
             const newValue = snapshot.val();
-            let widthpercentage = (100/userAlwd)*newValue;
+            let widthpercentage = (100 / userAlwd) * newValue;
             spanElement.innerText = newValue;
-            pbElement.style.width = widthpercentage+'%';
+            pbElement.style.width = widthpercentage + "%";
             console.log(newValue);
             console.log(elementId);
-        }
-    });
-}
-//------create EventListener--------show match details------------------------
-  function addEventListForImgClick(){
-    tagdata.forEach((item)=>{
-      let imgElement = document.getElementById(`${item}-img`);
-      // console.log(imgElement,item);
-      imgElement.addEventListener('click', function(){
-          createJoinedPlayerList(item);
-          console.log(`View Details Match is ${item}`);
-          document.getElementById('mainDiv').style.display = 'none';
-          document.getElementById('match-detail').style.display = 'block';
-      });
-
-    });
-  }
-//----------------->>>>>>>>>  
-
-     function matchDisplayCheck() {
-        let matchCompleted = localStorage.getItem('matchD');
-        let totalMatchCount = localStorage.getItem('Tmatch');
-        if(matchCompleted == totalMatchCount){
-          console.log('function working');
-          tagdata.forEach(matchId => {
-          livefetch(matchId);
-          clearInterval(intervalId);
+          }
         });
-        }else{
+      }
+      //------create EventListener--------show match details------------------------
+      function addEventListForImgClick() {
+        tagdata.forEach((item) => {
+          let imgElement = document.getElementById(`${item}-img`);
+          // console.log(imgElement,item);
+          imgElement.addEventListener("click", function () {
+            createJoinedPlayerList(item);
+            console.log(`View Details Match is ${item}`);
+            document.getElementById("mainDiv").style.display = "none";
+            document.getElementById("match-detail").style.display = "block";
+          });
+        });
+      }
+      //----------------->>>>>>>>>
+
+      function matchDisplayCheck() {
+        let matchCompleted = localStorage.getItem("matchD");
+        let totalMatchCount = localStorage.getItem("Tmatch");
+        if (matchCompleted == totalMatchCount) {
+          console.log("function working");
+          tagdata.forEach((matchId) => {
+            livefetch(matchId);
+            clearInterval(intervalId);
+          });
+        } else {
           console.log(`function not working`);
-        };
- }
+        }
+      }
 
-      function fetchJoinedMatch(){
-        let matchCompleted = localStorage.getItem('matchD');
-        let totalMatchCount = localStorage.getItem('Tmatch');
+      function fetchJoinedMatch() {
+        let matchCompleted = localStorage.getItem("matchD");
+        let totalMatchCount = localStorage.getItem("Tmatch");
 
-  if(matchCompleted == totalMatchCount){
-    clearInterval(joiendMDInterval);
+        if (matchCompleted == totalMatchCount) {
+          clearInterval(joiendMDInterval);
           const matchcountref = ref(db, `Accounts/${email}/TcrntMjoined`);
 
-    onValue(matchcountref, (snapshot) => {
-        if (snapshot.exists()) {
-            const newValue = snapshot.val();
-
-            const joinedMatchListref = ref(db, `Accounts/${email}/crntMatchList`);
-
-            get(joinedMatchListref)
-          .then((snapshot) => {
+          onValue(matchcountref, (snapshot) => {
             if (snapshot.exists()) {
-              TcrntMJoinedList = Object.keys(snapshot.val());
-              TcrntMJoinedList.forEach((match) => {
-                let btnId = `${match}-btn`;
-                let btn = document.getElementById(btnId);
-                btn.textContent = "View Details";
-                btn.style.backgroundColor = "red";
-              });
-              addEventListForImgClick();
-            } else {
-              console.log('No data found in the "noMatchlistFound" node.');
+              const newValue = snapshot.val();
+
+              const joinedMatchListref = ref(
+                db,
+                `Accounts/${email}/crntMatchList`
+              );
+
+              get(joinedMatchListref)
+                .then((snapshot) => {
+                  if (snapshot.exists()) {
+                    TcrntMJoinedList = Object.keys(snapshot.val());
+                    TcrntMJoinedList.forEach((match) => {
+                      let btnId = `${match}-btn`;
+                      let btn = document.getElementById(btnId);
+                      btn.textContent = "View Details";
+                      btn.style.backgroundColor = "red";
+                    });
+                    addEventListForImgClick();
+                  } else {
+                    console.log(
+                      'No data found in the "noMatchlistFound" node.'
+                    );
+                  }
+                })
+                .catch((error) => {
+                  console.error("Error fetching tags:", error);
+                });
             }
-          })
-          .catch((error) => {
-            console.error("Error fetching tags:", error);
           });
-
         }
-    });
       }
-      
 
-    }
-  
+      function uidSclicked() {
+        let type = localStorage.getItem("jt");
+        let input1 = document.getElementById("uid-input1").value;
+        const matchId = localStorage.getItem("crntmatch");
 
+        let dialogError = document.getElementById("uid-dialog-error");
+        if (type == "Squad") {
+          let input2 = document.getElementById("uid-input2").value;
+          let input3 = document.getElementById("uid-input3").value;
+          let input4 = document.getElementById("uid-input4").value;
 
+          if (input1 != "" && input2 != "" && input3 != "" && input4 != "") {
+            if (
+              input1 !== input2 &&
+              input1 !== input3 &&
+              input1 !== input4 &&
+              input2 !== input3 &&
+              input2 !== input4 &&
+              input3 !== input4
+            ) {
+              dialogError.innerText = "";
 
- function uidSclicked(){
-    let type = localStorage.getItem('jt');
-    let input1 = document.getElementById('uid-input1').value;
-    const matchId = localStorage.getItem('crntmatch');
+              let uid1 = input1;
+              let uid2 = input2;
+              let uid3 = input3;
+              let uid4 = input4;
+              let userList1 = {
+                [uid1]: "",
+                [uid2]: "",
+                [uid3]: "",
+                [uid4]: "",
+              };
 
-    let dialogError = document.getElementById('uid-dialog-error');
-    if(type == 'Squad'){
-        let input2 = document.getElementById('uid-input2').value;
-        let input3 = document.getElementById('uid-input3').value;
-        let input4 = document.getElementById('uid-input4').value;
-
-        if(input1 != '' && input2 != '' && input3 != '' && input4 != ''){
-          if(input1 !== input2 && input1 !== input3 && input1 !== input4 &&
-          input2 !== input3 && input2 !== input4 &&
-          input3 !== input4){
-            dialogError.innerText = '';    
-            
-            let uid1 = input1;
-            let uid2 = input2;
-            let uid3 = input3;
-            let uid4 = input4;
-            let userList1 = {
-                [uid1]: '',
-                [uid2]: '',
-                [uid3]: '',
-                [uid4]: ''
-            };
-
-            addUsersToMatch(matchId, userList1);
-          }else{
-            dialogError.innerText = '*UID must not be same !';
+              addUsersToMatch(matchId, userList1);
+            } else {
+              dialogError.innerText = "*UID must not be same !";
+            }
+          } else {
+            dialogError.innerText = "*Please Enter UID";
           }
+        } else if (type == "Duo") {
+          let input2 = document.getElementById("uid-input2").value;
 
-        }else{dialogError.innerText = '*Please Enter UID';}
-    }else if(type == 'Duo'){
-        let input2 = document.getElementById('uid-input2').value;
+          if (input1 != "" && input2 != "") {
+            if (input1 !== input2) {
+              dialogError.innerText = "";
+              let uid1 = input1;
+              let uid2 = input2;
+              let userList2 = {
+                [uid1]: "",
+                [uid2]: "",
+              };
 
-        if(input1 != '' && input2 != ''){
-          if(input1 !== input2){
-            dialogError.innerText = '';    
-            let uid1 = input1;
-            let uid2 = input2;
-            let userList2 = {
-                [uid1]: '',
-                [uid2]: ''
-            };
-
-            addUsersToMatch(matchId, userList2);
-          }else{
-            dialogError.innerText = '*UID must not be same !';
+              addUsersToMatch(matchId, userList2);
+            } else {
+              dialogError.innerText = "*UID must not be same !";
+            }
+          } else {
+            dialogError.innerText = "*Please Enter UID";
           }
-        }else{dialogError.innerText = '*Please Enter UID';}
-    }else{
-        if(input1 != ''){
-            dialogError.innerText = '';
+        } else {
+          if (input1 != "") {
+            dialogError.innerText = "";
             let uid1 = input1;
             let userList3 = {
-                [uid1]: ''
+              [uid1]: "",
             };
 
             addUsersToMatch(matchId, userList3);
-        }else{dialogError.innerText = '*Please Enter UID';}
-    }
-}
+          } else {
+            dialogError.innerText = "*Please Enter UID";
+          }
+        }
+      }
 
-document.querySelector('.uid-submit-btn').addEventListener('click', uidSclicked);
+      document
+        .querySelector(".uid-submit-btn")
+        .addEventListener("click", uidSclicked);
 
+      function addUsersToMatch(matchId, userList) {
+        TcrntMJoinedList.push(`${matchId}`);
+        let currentDate = new Date();
+        let year = currentDate.getFullYear();
+        let month = currentDate.getMonth() + 1;
+        let day = currentDate.getDate();
 
-function addUsersToMatch(matchId, userList) {
-    TcrntMJoinedList.push(`${matchId}`);
-    let currentDate = new Date();
-    let year = currentDate.getFullYear();
-    let month = currentDate.getMonth() + 1;
-    let day = currentDate.getDate();
+        // Get the current time components
+        let hours = currentDate.getHours();
+        let minutes = currentDate.getMinutes();
+        let seconds = currentDate.getSeconds();
 
-// Get the current time components
-let hours = currentDate.getHours();
-let minutes = currentDate.getMinutes();
-let seconds = currentDate.getSeconds();
+        let timeToAdd = {
+          time: `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`,
+        };
+        // TcrntMJoinedList.forEach((match) => {
+        //   Listtoadd[match] = "45678";
+        // });
+        const db = getDatabase();
+        const matchRef = ref(
+          db,
+          `upcomingMatch/${matchId}/joinedUserlist/${email}`
+        );
+        const crntMatchAddRef = ref(
+          db,
+          `Accounts/${email}/crntMatchList/${matchId}`
+        );
+        // const MatchHistoryAddRef = ref(db, `Accounts/${email}/crntMatchList`);
+        const TmatchHistoryAddRef = ref(
+          db,
+          `Accounts/${email}/matchesHistory/${matchId}`
+        );
 
-    let timeToAdd = {
-      time:`${year}-${month}-${day} ${hours}:${minutes}:${seconds}` 
-     };
-    // TcrntMJoinedList.forEach((match) => {
-    //   Listtoadd[match] = "45678";
-    // });
-    const db = getDatabase();
-    const matchRef = ref(db, `upcomingMatch/${matchId}/joinedUserlist/${email}`);
-    const crntMatchAddRef = ref(db, `Accounts/${email}/crntMatchList/${matchId}`);
-    // const MatchHistoryAddRef = ref(db, `Accounts/${email}/crntMatchList`);
-    const TmatchHistoryAddRef = ref(db, `Accounts/${email}/matchesHistory/${matchId}`);
-
-    set(matchRef, userList)
-        .then(() => {
+        set(matchRef, userList).then(() => {
           dismissDialog();
-            console.log(`Player Joined to Match: ${matchId}`);
-        })
-    set(crntMatchAddRef, timeToAdd)
-        .then(() => {
-            console.log(`Match added to crnt match: ${matchId}`);
-        })
-    set(TmatchHistoryAddRef, timeToAdd)
-        .then(() => {
-            console.log(`Match added to matchHsitory match: ${matchId}`);
-        })
-        .catch((error) => {
-            console.error(`Error Adding Player to match:${matchId}`, error);
+          console.log(`Player Joined to Match: ${matchId}`);
         });
-}
+        set(crntMatchAddRef, timeToAdd).then(() => {
+          console.log(`Match added to crnt match: ${matchId}`);
+        });
+        set(TmatchHistoryAddRef, timeToAdd)
+          .then(() => {
+            console.log(`Match added to matchHsitory match: ${matchId}`);
+          })
+          .catch((error) => {
+            console.error(`Error Adding Player to match:${matchId}`, error);
+          });
+      }
 
-function getIdPass(){
-  let check = localStorage.getItem('getIdPass');
-  let crntmatch = localStorage.getItem('crntmatch');
-  if(check == 'true'){
-    localStorage.setItem('getIdPass','false');
-    console.log(`match to get id pass: ${crntmatch} `);
-     
+      function getIdPass() {
+        let check = localStorage.getItem("getIdPass");
+        let crntmatch = localStorage.getItem("crntmatch");
+        if (check == "true") {
+          localStorage.setItem("getIdPass", "false");
+          console.log(`match to get id pass: ${crntmatch} `);
 
-    const roomidref = ref(db, `upcomingMatch/${crntmatch}/roomid`);
-    const roompassref = ref(db, `upcomingMatch/${crntmatch}/roompass`);
+          const roomidref = ref(db, `upcomingMatch/${crntmatch}/roomid`);
+          const roompassref = ref(db, `upcomingMatch/${crntmatch}/roompass`);
 
-    onValue(roomidref, (snapshot) => {
-        if (snapshot.exists()) {
-            const newValue = snapshot.val();
-            document.getElementById('room-id-lbl').textContent = newValue;
+          onValue(roomidref, (snapshot) => {
+            if (snapshot.exists()) {
+              const newValue = snapshot.val();
+              document.getElementById("room-id-lbl").textContent = newValue;
+            }
+          });
+
+          onValue(roompassref, (snapshot) => {
+            if (snapshot.exists()) {
+              const newValue = snapshot.val();
+              document.getElementById("room-pass-lbl").textContent = newValue;
+            }
+          });
+
+          document.getElementById("customDialog").style.display = "block";
+        } else {
+          console.log("not permision to get id pass");
         }
-    });
+      }
 
-    onValue(roompassref, (snapshot) => {
-        if (snapshot.exists()) {
-            const newValue = snapshot.val();
-            document.getElementById('room-pass-lbl').textContent = newValue;
-        }
-    });
-    
-    document.getElementById('customDialog').style.display = 'block';
-
-  }
-  else{
-    console.log('not permision to get id pass');
-  }
-}
-
-
-  
       let intervalId = setInterval(matchDisplayCheck, 200);
       let getIdpassInterval = setInterval(getIdPass, 200);
       let joiendMDInterval = setInterval(fetchJoinedMatch, 200);
 
-//------create Joined Player List---->>>>>>>>>>
-function createJoinedPlayerList(matchId){
-  // const matchId = localStorage.getItem('crntmatch');
-  let container = document.getElementById('participant-container');
-  const matchListRef = ref(db, `upcomingMatch/${matchId}/joinedUserlist`);
-  let crntplayerid;
-  let crntplayerList;
-  let newHTML = '';
-  let index = 1;
+      //------create Joined Player List---->>>>>>>>>>
+      function createJoinedPlayerList(matchId) {
+        // const matchId = localStorage.getItem('crntmatch');
+        let container = document.getElementById("participant-container");
+        const matchListRef = ref(db, `upcomingMatch/${matchId}/joinedUserlist`);
+        let crntplayerid;
+        let crntplayerList;
+        let newHTML = "";
+        let index = 1;
 
-  get(matchListRef)
+        get(matchListRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
               crntplayerid = Object.keys(snapshot.val());
               crntplayerid.forEach((playerid) => {
+                const playerlistRef = ref(
+                  db,
+                  `upcomingMatch/${matchId}/joinedUserlist/${playerid}`
+                );
 
-            const playerlistRef = ref(db, `upcomingMatch/${matchId}/joinedUserlist/${playerid}`);
-
-  get(playerlistRef)
-          .then((snapshot) => {
-            if (snapshot.exists()) {
-              crntplayerList = Object.keys(snapshot.val());
-              crntplayerList.forEach((player) => {
-                newHTML += `<div class="player-card">
+                get(playerlistRef)
+                  .then((snapshot) => {
+                    if (snapshot.exists()) {
+                      crntplayerList = Object.keys(snapshot.val());
+                      crntplayerList.forEach((player) => {
+                        newHTML += `<div class="player-card">
                 <div style="margin-right: 0px;" class="player-position">${index}</div>
                 <div class="player-name">${player}</div>
             </div>`;
-            index++;
+                        index++;
+                      });
+                      container.innerHTML = newHTML;
+                    } else {
+                      console.log("No player found in player id match.");
+                    }
+                  })
+                  .catch((error) => {
+                    console.error("Error fetching tags:", error);
+                  });
               });
-            container.innerHTML = newHTML;
-          } else {
-              console.log('No player found in player id match.');
+            } else {
+              container.innerHTML = `<h5>No participants yet...</h5>`;
+              console.log("No data found in the  match.");
             }
           })
           .catch((error) => {
             console.error("Error fetching tags:", error);
           });
-              });
-          } else {
-            container.innerHTML = `<h5>No participants yet...</h5>`;
-              console.log('No data found in the  match.');
-            }
-          })
-          .catch((error) => {
-            console.error("Error fetching tags:", error);
-          });
-        }
-        
+      }
 
-//----------------->>>>>
+      //----------------->>>>>
 
-//-----------Leaderboard------------>>>>>>>>>>>>>>>
+      //-----------Leaderboard------------>>>>>>>>>>>>>>>
 
-function createLeaderboard(){
-  const matchId = localStorage.getItem('crntmatch');
-  let container = document.getElementById('participant-container');
-  const matchListRef = ref(db, `upcomingMatch/${matchId}/joinedUserlist`);
-  let crntplayerList;
-  let newHTML = '';
+      function createLeaderboard() {
+        const matchId = localStorage.getItem("crntmatch");
+        let container = document.getElementById("participant-container");
+        const matchListRef = ref(db, `upcomingMatch/${matchId}/joinedUserlist`);
+        let crntplayerList;
+        let newHTML = "";
 
-  get(matchListRef)
+        get(matchListRef)
           .then((snapshot) => {
             if (snapshot.exists()) {
               crntplayerList = Object.keys(snapshot.val());
               crntplayerList.forEach((player) => {
-                let ps = index+1;
+                let ps = index + 1;
                 newHTML += `<div class="player-card">
                 <div class="player-position">${ps}</div>
                 <div class="player-name">${player}</div>
             </div>`;
               });
-            container.innerHTML = newHTML;
-          } else {
-              console.log('No data found in the PlayerJoinedList match.');
+              container.innerHTML = newHTML;
+            } else {
+              console.log("No data found in the PlayerJoinedList match.");
             }
           })
           .catch((error) => {
             console.error("Error fetching tags:", error);
           });
-        }
-
-
-
+      }
 
       let players = [
-    { name: "Player1", score: 100 },
-    { name: "Player2", score: 85 },
-    { name: "Player3", score: 120 },
-    { name: "Player4", score: 95 }
-];
+        { name: "Player1", score: 100 },
+        { name: "Player2", score: 85 },
+        { name: "Player3", score: 120 },
+        { name: "Player4", score: 95 },
+      ];
 
-// Sort the players based on their scores in descending order
-// players.sort((a, b) => b.score - a.score);
+      // Sort the players based on their scores in descending order
+      // players.sort((a, b) => b.score - a.score);
 
-// // Print the sorted leaderboard
-// players.forEach((player, index) => {
-//     console.log(`Rank ${index + 1}: ${player.name} - Score: ${player.score}`);
-// });
+      // // Print the sorted leaderboard
+      // players.forEach((player, index) => {
+      //     console.log(`Rank ${index + 1}: ${player.name} - Score: ${player.score}`);
+      // });
 
+      //--------------------------------------->>>
 
-
-
-
-//--------------------------------------->>>
-
-
+      calltag();
     </script>
     <script src="./JS/index.js"></script>
   </body>

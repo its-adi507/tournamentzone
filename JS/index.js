@@ -91,18 +91,11 @@ let newHtml = `<h3 class="lbl1">demo</h3>`;
 
 
         document.getElementById('customDialog2').style.display = 'block';
-        // btn.textContent = "View Details"
-        // btn.style.backgroundColor = "red"
     }else if(btnTxt == 'View Details'){
 
         let crntmatch = localStorage.getItem('crntmatch');
         localStorage.setItem('getIdPass','true');
         console.log(crntmatch);
-        // getIdPass(crntmatch);
-        // let roomidElement = document.getElementById('room-id-lbl');
-        // document.getElementById('customDialog').style.display = 'block';
-        // btn.textContent = "Join"
-        // btn.style.backgroundColor = "rgb(44, 208, 44)"
     }
     
 }
