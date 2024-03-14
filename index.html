@@ -37,28 +37,28 @@
         <input
           class="uid-input"
           id="uid-input1"
-          placeholder="UID 1"
+          placeholder="GAME ID 1"
           type="number"
           inputmode="numeric"
         />
         <input
           class="uid-input"
           id="uid-input2"
-          placeholder="UID 2"
+          placeholder="GAME ID 2"
           type="number"
           inputmode="numeric"
         />
         <input
           class="uid-input"
           id="uid-input3"
-          placeholder="UID 3"
+          placeholder="GAME ID 3"
           type="number"
           inputmode="numeric"
         />
         <input
           class="uid-input"
           id="uid-input4"
-          placeholder="UID 4"
+          placeholder="GAME ID 4"
           type="number"
           inputmode="numeric"
         />
@@ -69,6 +69,8 @@
     <button id="clickbtn">click</button>
     <div class="div-container">
       <div class="main" id="mainDiv"></div>
+      <div class="main" id="mainDiv2"></div>
+      <div class="main" id="mainDiv3"></div>
 
       <div id="match-detail">
         <button
@@ -115,6 +117,7 @@
       };
       const app = initializeApp(firebaseConfig);
       const db = getDatabase();
+
       const upcomingMatchRef = ref(db, "upcomingMatch");
       let containerElement = document.querySelector(".main");
       localStorage.setItem("Tmatch", "not defined");
@@ -122,6 +125,7 @@
       let email = "adityasharma7270@gmail:com";
       console.log(email);
       let TcrntMJoinedList;
+      let TcrntJoinedMatchNo = 0;
 
       let tagdata;
       localStorage.setItem("mdc", "false");
@@ -185,6 +189,7 @@
         let elementId = `${match}-uj`;
         let elementId2 = `${match}-pb`;
         let elementId3 = `${match}-ua`;
+        let btn = document.getElementById(`${match}-btn`);
 
         let pbElement = document.getElementById(elementId2);
         let spanElement = document.getElementById(elementId);
@@ -197,6 +202,10 @@
             let widthpercentage = (100 / userAlwd) * newValue;
             spanElement.innerText = newValue;
             pbElement.style.width = widthpercentage + "%";
+            if(newValue >= userAlwd){
+                      btn.textContent = "Full";
+                      btn.style.backgroundColor = "red";
+            }
             console.log(newValue);
             console.log(elementId);
           }
@@ -215,14 +224,17 @@
           });
         });
       }
-      //----------------->>>>>>>>>
+      //----------------->>>>>>>>> 
 
       function matchDisplayCheck() {
         let matchCompleted = localStorage.getItem("matchD");
         let totalMatchCount = localStorage.getItem("Tmatch");
         if (matchCompleted == totalMatchCount) {
+          localStorage.setItem("matchD", 0);
           console.log("function working");
           tagdata.forEach((matchId) => {
+            
+            addEventListForImgClick();
             livefetch(matchId);
             clearInterval(intervalId);
           });
@@ -237,11 +249,12 @@
 
         if (matchCompleted == totalMatchCount) {
           clearInterval(joiendMDInterval);
-          const matchcountref = ref(db, `Accounts/${email}/TcrntMjoined`);
+          const matchcountref = ref(db, `Accounts/${email}/TcrntMjoined/value`);
 
           onValue(matchcountref, (snapshot) => {
             if (snapshot.exists()) {
               const newValue = snapshot.val();
+              TcrntJoinedMatchNo = newValue;
 
               const joinedMatchListref = ref(
                 db,
@@ -252,13 +265,14 @@
                 .then((snapshot) => {
                   if (snapshot.exists()) {
                     TcrntMJoinedList = Object.keys(snapshot.val());
+                    TcrntJoinedMatchNo = TcrntMJoinedList.length;
                     TcrntMJoinedList.forEach((match) => {
                       let btnId = `${match}-btn`;
                       let btn = document.getElementById(btnId);
                       btn.textContent = "View Details";
-                      btn.style.backgroundColor = "red";
+                      btn.style.backgroundColor = "orange";
                     });
-                    addEventListForImgClick();
+                    
                   } else {
                     console.log(
                       'No data found in the "noMatchlistFound" node.'
@@ -354,6 +368,10 @@
 
       function addUsersToMatch(matchId, userList) {
         TcrntMJoinedList.push(`${matchId}`);
+
+        let updatedMacthNo = {
+          value:TcrntJoinedMatchNo+1,
+        };
         let currentDate = new Date();
         let year = currentDate.getFullYear();
         let month = currentDate.getMonth() + 1;
@@ -367,10 +385,27 @@
         let timeToAdd = {
           time: `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`,
         };
-        // TcrntMJoinedList.forEach((match) => {
-        //   Listtoadd[match] = "45678";
-        // });
         const db = getDatabase();
+
+        const match1Ref = ref(db, `upcomingMatch/${matchId}`);
+
+        let crntMatchJoinedPlyer = function(){
+         let Pnumber = document.getElementById(`${matchId}-uj`).innerText;
+          return Pnumber++;
+        } ;
+
+        let currentJP = crntMatchJoinedPlyer();
+        let NPJV = currentJP + 1 ;
+    
+
+        update(match1Ref, { joineduser: NPJV});
+        
+        const TmatchplayedRef = ref(
+          db,
+          `Accounts/${email}/TcrntMjoined`
+          
+
+        );
         const matchRef = ref(
           db,
           `upcomingMatch/${matchId}/joinedUserlist/${email}`
@@ -379,7 +414,6 @@
           db,
           `Accounts/${email}/crntMatchList/${matchId}`
         );
-        // const MatchHistoryAddRef = ref(db, `Accounts/${email}/crntMatchList`);
         const TmatchHistoryAddRef = ref(
           db,
           `Accounts/${email}/matchesHistory/${matchId}`
@@ -395,6 +429,11 @@
         set(TmatchHistoryAddRef, timeToAdd)
           .then(() => {
             console.log(`Match added to matchHsitory match: ${matchId}`);
+          })
+        set(TmatchplayedRef, updatedMacthNo)
+          .then(() => {
+            console.log(`Updated Match value: ${updatedMacthNo.value}`);
+            TcrntJoinedMatchNo++
           })
           .catch((error) => {
             console.error(`Error Adding Player to match:${matchId}`, error);

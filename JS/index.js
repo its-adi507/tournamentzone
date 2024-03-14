@@ -55,7 +55,7 @@ let newHtml = `<h3 class="lbl1">demo</h3>`;
     document.querySelector('.lbl1').innerHTML = navigator.userAgent;
     matchCompleted += 1;
     localStorage.setItem('matchD', matchCompleted);
-    // localStorage.setItem('mdc', 'true');
+    // localStorage.setItem('mdc', 'true'); 
 }
 
 

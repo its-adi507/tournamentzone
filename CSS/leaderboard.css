@@ -67,10 +67,10 @@ html,body{
 }
 .player-card{
     width: 97%;
-    height: 50px;
+    height: 40px;
     margin-left: 5px;
     margin-top: 5px;
-    border-radius: 5px;
+    border-radius: 30px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,7 +79,8 @@ html,body{
     box-shadow: 0px 0px 5px white;
 }
 .player-position{
-    margin-left: 5px;
+    text-align: center;
+    margin-left: 10px;
     margin-right: auto;
     color: white;
 }
