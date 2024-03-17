@@ -67,35 +67,81 @@
         <p id="uid-dialog-error"></p>
       </div>
     </div>
-    <button id="clickbtn">click</button>
-    <div class="div-container">
-      <div id="match-filter"></div>
-      <div class="main" id="mainDiv"></div>
-      <div class="main" id="mainDiv2"></div>
-      <div class="main" id="mainDiv3"></div>
+    <!-- <button id="clickbtn">click</button> -->
+    <div class="div-container" id="matches">
 
-      <div id="match-detail">
-        <button id="match-detail-back-btn"
-          onclick="document.getElementById('match-detail').style.display = 'none'; document.getElementById('mainDiv').style.display = 'block';"
-        ><span class="material-icons">arrow_back</span></button>
-        <button id="test-btn">test</button>
-        <div id="mtch-detail-tab-switch">
-          <div id="participant-tab">Participant</div>
-          <div id="Details-tab">Details</div>
+      <div id="home-tab-layout">
+        <div class="home-tab" id="ff-tab">FREE FIRE</div>
+        <div class="home-tab" id="bg-tab">BGMI</div>
+        <div class="home-tab" id="fl-tab">FARLIGHT 84</div>
+      </div>
+      
+      <div id="ff-match">
+        <div class="match-filter">
+          <button class="match-back-btn" id="ff-back-btn"
+        onclick="document.getElementById('ff-match').style.display = 'none'; document.getElementById('home-tab-layout').style.display = 'flex';"
+      ><span class="material-icons">arrow_back</span></button>
+          <div class="mf-tab" id="ff-solo-tab">Solo</div>
+          <div class="mf-tab" id="ff-duo-tab">Duo</div>
+          <div class="mf-tab" id="ff-squad-tab">Squad</div>
         </div>
-        
+        <div class="main" id="mainDiv"></div>
+        <div class="main" id="mainDiv2"></div>
+        <div class="main" id="mainDiv3"></div>
+      </div>
+      
+      <div id="bg-match">
+        <div class="match-filter">
+          <button class="match-back-btn" id="ff-back-btn"
+        onclick="document.getElementById('bg-match').style.display = 'none'; document.getElementById('home-tab-layout').style.display = 'flex';"
+      ><span class="material-icons">arrow_back</span></button>
+          <div class="mf-tab" id="bg-solo-tab">Solo</div>
+          <div class="mf-tab" id="bg-duo-tab">Duo</div>
+          <div class="mf-tab" id="bg-squad-tab">Squad</div>
+        </div>
+        <div class="main" id="mainDiv4"></div>
+        <div class="main" id="mainDiv5"></div>
+        <div class="main" id="mainDiv6"></div>
+      </div>
 
-        <div id="participant-container">
-          <div class="player-card">
-            <div class="player-position">1</div>
-            <div class="player-name">1020871391</div>
-            <div class="player-score">154</div>
-          </div>
+      <div id="fl-match">
+        <div class="match-filter">
+          <button class="match-back-btn" id="ff-back-btn"
+        onclick="document.getElementById('fl-match').style.display = 'none'; document.getElementById('home-tab-layout').style.display = 'flex';"
+      ><span class="material-icons">arrow_back</span></button>
+          <div class="mf-tab" id="fl-solo-tab">Solo</div>
+          <div class="mf-tab" id="fl-duo-tab">Duo</div>
+          <div class="mf-tab" id="fl-squad-tab">Squad</div>
         </div>
-        <div id="details-container">
+        <div class="main" id="mainDiv7"></div>
+        <div class="main" id="mainDiv8"></div>
+        <div class="main" id="mainDiv9"></div>
+      </div>
+
+
+    </div>
+    <div id="match-detail">
+      <button id="match-detail-back-btn"
+        onclick="document.getElementById('match-detail').style.display = 'none'; document.getElementById('matches').style.display = 'block';"
+      ><span class="material-icons">arrow_back</span></button>
+      <button id="test-btn">test</button>
+      <div id="mtch-detail-tab-switch">
+        <div id="participant-tab">Participant</div>
+        <div id="Details-tab">Details</div>
+      </div>
+      
+
+      <div id="participant-container">
+        <div class="player-card">
+          <div class="player-position">1</div>
+          <div class="player-name">1020871391</div>
+          <div class="player-score">154</div>
         </div>
       </div>
+      <div id="details-container">
+      </div>
     </div>
+
 
     <script type="module">
       import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
@@ -124,19 +170,20 @@
       const db = getDatabase();
 
       const upcomingMatchRef = ref(db, "upcomingMatch");
+      let TcrntMJoinedList = [];
       let containerElement = document.querySelector(".main");
-      localStorage.setItem("Tmatch", "not defined");
+      localStorage.setItem("Tmatch", 'undifiened');
       localStorage.setItem("matchD", 0);
       let email = "adityasharma7270@gmail:com";
       console.log(email);
-      let TcrntMJoinedList;
+      
       let TcrntJoinedMatchNo = 0;
 
       let tagdata;
       localStorage.setItem("mdc", "false");
 
       function calltag() {
-        document.getElementById("clickbtn").style.display = "none";
+        // document.getElementById("clickbtn").style.display = "none";
 
         get(upcomingMatchRef)
           .then((snapshot) => {
@@ -196,7 +243,7 @@
                }else{
                 document.getElementById('details-container').innerHTML = "<p>Deatils not available..</p>";
                }
-            }s
+            }
           });
       };
       
@@ -238,7 +285,7 @@
           imgElement.addEventListener("click", function () {
             createJoinedPlayerList(item);
             console.log(`View Details Match is ${item}`);
-            document.getElementById("mainDiv").style.display = "none";
+            document.getElementById("matches").style.display = "none";
             document.getElementById("match-detail").style.display = "block";
           });
         });
@@ -249,8 +296,7 @@
         let matchCompleted = localStorage.getItem("matchD");
         let totalMatchCount = localStorage.getItem("Tmatch");
         if (matchCompleted == totalMatchCount) {
-          localStorage.setItem("matchD", 0);
-          console.log("function working");
+          console.log(`function working MC =${matchCompleted} and TM = ${totalMatchCount}`);
           tagdata.forEach((matchId) => {
             
             addEventListForImgClick();
@@ -258,7 +304,7 @@
             clearInterval(intervalId);
           });
         } else {
-          console.log(`function not working`);
+          console.log(`function Not working MC =${matchCompleted} and TM = ${totalMatchCount}`);
         }
       }
 
@@ -285,6 +331,7 @@
                   if (snapshot.exists()) {
                     TcrntMJoinedList = Object.keys(snapshot.val());
                     TcrntJoinedMatchNo = TcrntMJoinedList.length;
+                    console.log(`TMJN =${TcrntJoinedMatchNo}`);
                     TcrntMJoinedList.forEach((match) => {
                       let btnId = `${match}-btn`;
                       let btn = document.getElementById(btnId);
@@ -303,7 +350,7 @@
                 });
             }
           });
-        }
+        }else{console.log('not permission to fetch match joined');}
       }
 
       function uidSclicked() {
@@ -489,9 +536,9 @@
         }
       }
 
-      let intervalId = setInterval(matchDisplayCheck, 200);
-      let getIdpassInterval = setInterval(getIdPass, 200);
-      let joiendMDInterval = setInterval(fetchJoinedMatch, 200);
+      // let intervalId = setInterval(matchDisplayCheck, 200);
+      // let getIdpassInterval = setInterval(getIdPass, 200);
+      // let joiendMDInterval = setInterval(fetchJoinedMatch, 200);
 
       //------create Joined Player List---->>>>>>>>>>
       function createJoinedPlayerList(matchId) {
@@ -595,10 +642,15 @@
 
 
 
-// -----------Event Listener---------->>>>>>>>>
+
+ 
+//  document.getElementById('test-btn').addEventListener('click', insertDetailsHtml);
+
+////// ------------Tab Function---------->>>>>>>>
+// -----------details Event Listener---------->>>>>>>>>
 
 
- document.getElementById('participant-tab').addEventListener('click', function(){
+document.getElementById('participant-tab').addEventListener('click', function(){
       document.getElementById('details-container').style.display = "none";
       document.getElementById('Details-tab').style.borderColor = "transparent";
       document.getElementById('participant-tab').style.borderColor = "yellow";
@@ -612,14 +664,125 @@
       document.getElementById('details-container').style.display = "block";
       
  });
-//  document.getElementById('test-btn').addEventListener('click', insertDetailsHtml);
+//--------FF Tab function--Event Listener-------->>>>>>>>
+document.getElementById('ff-solo-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv2').style.display = "none";
+      document.getElementById('mainDiv3').style.display = "none";
+      document.getElementById('ff-duo-tab').style.borderColor = "transparent";
+      document.getElementById('ff-squad-tab').style.borderColor = "transparent";
+      document.getElementById('ff-solo-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv').style.display = "block";
+      
+ });
+ document.getElementById('ff-duo-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv').style.display = "none";
+      document.getElementById('mainDiv3').style.display = "none";
+      document.getElementById('ff-solo-tab').style.borderColor = "transparent";
+      document.getElementById('ff-squad-tab').style.borderColor = "transparent";
+      document.getElementById('ff-duo-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv2').style.display = "block";
+      
+ });
+ document.getElementById('ff-squad-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv2').style.display = "none";
+      document.getElementById('mainDiv').style.display = "none";
+      document.getElementById('ff-duo-tab').style.borderColor = "transparent";
+      document.getElementById('ff-solo-tab').style.borderColor = "transparent";
+      document.getElementById('ff-squad-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv3').style.display = "block";
+      
+ });
 
+//-------->>
 
+//--------BG Tab function--Event Listener-------->>>>>>>>
+document.getElementById('bg-solo-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv5').style.display = "none";
+      document.getElementById('mainDiv6').style.display = "none";
+      document.getElementById('bg-duo-tab').style.borderColor = "transparent";
+      document.getElementById('bg-squad-tab').style.borderColor = "transparent";
+      document.getElementById('bg-solo-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv4').style.display = "block";
+      
+ });
+ document.getElementById('bg-duo-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv4').style.display = "none";
+      document.getElementById('mainDiv6').style.display = "none";
+      document.getElementById('bg-solo-tab').style.borderColor = "transparent";
+      document.getElementById('bg-squad-tab').style.borderColor = "transparent";
+      document.getElementById('bg-duo-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv5').style.display = "block";
+      
+ });
+ document.getElementById('bg-squad-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv5').style.display = "none";
+      document.getElementById('mainDiv4').style.display = "none";
+      document.getElementById('bg-duo-tab').style.borderColor = "transparent";
+      document.getElementById('bg-solo-tab').style.borderColor = "transparent";
+      document.getElementById('bg-squad-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv6').style.display = "block";
+      
+ });
+
+//-------->>
+
+//--------FL Tab function--Event Listener-------->>>>>>>>
+document.getElementById('fl-solo-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv8').style.display = "none";
+      document.getElementById('mainDiv9').style.display = "none";
+      document.getElementById('fl-duo-tab').style.borderColor = "transparent";
+      document.getElementById('fl-squad-tab').style.borderColor = "transparent";
+      document.getElementById('fl-solo-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv7').style.display = "block";
+      
+ });
+ document.getElementById('fl-duo-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv7').style.display = "none";
+      document.getElementById('mainDiv9').style.display = "none";
+      document.getElementById('fl-solo-tab').style.borderColor = "transparent";
+      document.getElementById('fl-squad-tab').style.borderColor = "transparent";
+      document.getElementById('fl-duo-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv8').style.display = "block";
+      
+ });
+ document.getElementById('fl-squad-tab').addEventListener('click', function(){
+      document.getElementById('mainDiv8').style.display = "none";
+      document.getElementById('mainDiv7').style.display = "none";
+      document.getElementById('fl-duo-tab').style.borderColor = "transparent";
+      document.getElementById('fl-solo-tab').style.borderColor = "transparent";
+      document.getElementById('fl-squad-tab').style.borderColor = "yellow";
+      document.getElementById('mainDiv9').style.display = "block";
+      
+ });
+
+//-------->>
+
+//---------home-tab-function------>
+
+document.getElementById('ff-tab').addEventListener('click', function(){
+      document.getElementById('home-tab-layout').style.display = "none";
+      document.getElementById('ff-match').style.display = "block";
+      
+ });
+ document.getElementById('bg-tab').addEventListener('click', function(){
+      document.getElementById('home-tab-layout').style.display = "none";
+      document.getElementById('bg-match').style.display = "block";
+      
+ });
+ document.getElementById('fl-tab').addEventListener('click', function(){
+      document.getElementById('home-tab-layout').style.display = "none";
+      document.getElementById('fl-match').style.display = "block";
+      
+ });
+
+//---------
+
+///////////------------------------------
 
 
       //-------------call functions-------------------------->>>
 
-      calltag();
+      // calltag();
     </script>
     <script src="./JS/index.js"></script>
   </body>
