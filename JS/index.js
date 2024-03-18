@@ -1,23 +1,34 @@
 
 let matchData = []; // Define matchData globally
-let newHtml = `<h3 class="lbl1">demo</h3>`;
+
+let newHtm;
+let newHtml1 = '';
+let newHtml2 = '';
+let newHtml3 = '';
+let newHtml4 = '';
+let newHtml5 = '';
+let newHtml6 = '';
+let newHtml7 = '';
+let newHtml8 = '';
+let newHtml9 = '';
 
   function create(newMatch) {
     let matchCompleted = localStorage.getItem('matchD');
     matchCompleted = parseInt(matchCompleted);
-  
-  newHtml += `<div class="match-container">
+    let mtchCode = newMatch.id.slice(0, 4);;
+    console.log(mtchCode);
+    newHtml = `<div class="match-container">
         <div class="banner-img-container"><img class="banner-img" id="${newMatch.id}-img" src="${newMatch.banner_img}" alt=""></div>
         <div class="match-detail-container">
             <div class="match-title-logo-container">
                 <img onclick="localStorage.setItem('crntmatch', '${newMatch.id}')" class="match-logo" src="${newMatch.logo_img}" alt="">
                 <div class="match-title-container">
-                    <p class="match-title">Free Fire Booyah reward Fight to be Top 1${newMatch.title}</p>
+                    <p class="match-title">Free Fire Booyah reward Fight to be Top 1${newMatch.title} ${newMatch.id}</p>
                     <p class="match-date">${newMatch.date} ${newMatch.Time}</p>
                 </div>
             </div>
             <div class="lbl-holder">
-                <span>Booyah</span>
+                <span>Booyah</span> 
                 <span>Per Kill</span>
                 <span>Entry Fee</span>
             </div>
@@ -51,8 +62,40 @@ let newHtml = `<h3 class="lbl1">demo</h3>`;
             </div>
         </div>
     </div>`;
-    document.querySelector(".main").innerHTML = newHtml;
-    document.querySelector('.lbl1').innerHTML = navigator.userAgent;
+
+    if(mtchCode == 'ffso'){
+        newHtml1 += newHtml;
+    }else if (mtchCode == 'ffdu'){
+        newHtml2 += newHtml;
+    }else if(mtchCode == 'ffsq'){
+        newHtml3 += newHtml;
+    }else if (mtchCode == 'bgso'){
+        newHtml4 += newHtml;
+    }else if(mtchCode == 'bgdu'){
+        newHtml5 += newHtml;
+    }else if (mtchCode == 'bgsq'){
+        newHtml6 += newHtml;
+    }else if(mtchCode == 'flso'){
+        newHtml7 += newHtml;
+    }else if (mtchCode == 'fldu'){
+        newHtml8 += newHtml;
+    }else if(mtchCode == 'flsq'){
+        newHtml9 += newHtml;
+    }
+  
+    document.getElementById("mainDiv").innerHTML = newHtml1;
+    document.getElementById("mainDiv2").innerHTML = newHtml2;
+    document.getElementById("mainDiv3").innerHTML = newHtml3;
+
+    document.getElementById("mainDiv4").innerHTML = newHtml4;
+    document.getElementById("mainDiv5").innerHTML = newHtml5;
+    document.getElementById("mainDiv6").innerHTML = newHtml6;
+
+    document.getElementById("mainDiv7").innerHTML = newHtml7;
+    document.getElementById("mainDiv8").innerHTML = newHtml8;
+    document.getElementById("mainDiv9").innerHTML = newHtml9;
+
+    document.getElementById('lbl1').innerHTML = navigator.userAgent;
     matchCompleted += 1;
     localStorage.setItem('matchD', matchCompleted);
     // localStorage.setItem('mdc', 'true'); 

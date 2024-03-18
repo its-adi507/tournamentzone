@@ -71,6 +71,7 @@
     <div class="div-container" id="matches">
 
       <div id="home-tab-layout">
+        <p id="lbl1"></p>
         <div class="home-tab" id="ff-tab">FREE FIRE</div>
         <div class="home-tab" id="bg-tab">BGMI</div>
         <div class="home-tab" id="fl-tab">FARLIGHT 84</div>
@@ -536,9 +537,9 @@
         }
       }
 
-      // let intervalId = setInterval(matchDisplayCheck, 200);
-      // let getIdpassInterval = setInterval(getIdPass, 200);
-      // let joiendMDInterval = setInterval(fetchJoinedMatch, 200);
+       let intervalId = setInterval(matchDisplayCheck, 200);
+       let getIdpassInterval = setInterval(getIdPass, 200);
+       let joiendMDInterval = setInterval(fetchJoinedMatch, 200);
 
       //------create Joined Player List---->>>>>>>>>>
       function createJoinedPlayerList(matchId) {
@@ -782,7 +783,7 @@ document.getElementById('ff-tab').addEventListener('click', function(){
 
       //-------------call functions-------------------------->>>
 
-      // calltag();
+      calltag();
     </script>
     <script src="./JS/index.js"></script>
   </body>
