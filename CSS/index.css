@@ -18,7 +18,7 @@ html,body{
 
 
 
-.Div-container{
+.div-container{
     width: 100%;
     display: flex;
     flex-direction: column;
