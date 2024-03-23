@@ -72,9 +72,9 @@
 
       <div id="home-tab-layout">
         <p id="lbl1"></p>
-        <div class="home-tab" id="ff-tab">FREE FIRE</div>
-        <div class="home-tab" id="bg-tab">BGMI</div>
-        <div class="home-tab" id="fl-tab">FARLIGHT 84</div>
+        <div class="home-tab" id="ff-tab"></div>
+        <div class="home-tab" id="bg-tab"></div>
+        <div class="home-tab" id="fl-tab"></div>
       </div>
       
       <div id="ff-match">
@@ -125,7 +125,6 @@
       <button id="match-detail-back-btn"
         onclick="document.getElementById('match-detail').style.display = 'none'; document.getElementById('matches').style.display = 'block';"
       ><span class="material-icons">arrow_back</span></button>
-      <button id="test-btn">test</button>
       <div id="mtch-detail-tab-switch">
         <div id="participant-tab">Participant</div>
         <div id="Details-tab">Details</div>
@@ -512,6 +511,8 @@
         let crntmatch = localStorage.getItem("crntmatch");
         if (check == "true") {
           localStorage.setItem("getIdPass", "false");
+          document.getElementById("room-id-lbl").textContent = '';
+          document.getElementById("room-pass-lbl").textContent = '';
           console.log(`match to get id pass: ${crntmatch} `);
 
           const roomidref = ref(db, `upcomingMatch/${crntmatch}/roomid`);
@@ -582,7 +583,7 @@
                   });
               });
             } else {
-              container.innerHTML = `<h5>No participants yet...</h5>`;
+              container.innerHTML = `<h5 id="no-participant-lbl">No participants yet...</h5>`;
               console.log("No data found in the  match.");
             }
           })

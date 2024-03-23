@@ -23,7 +23,7 @@ let newHtml9 = '';
             <div class="match-title-logo-container">
                 <img onclick="localStorage.setItem('crntmatch', '${newMatch.id}')" class="match-logo" src="${newMatch.logo_img}" alt="">
                 <div class="match-title-container">
-                    <p class="match-title">Free Fire Booyah reward Fight to be Top 1${newMatch.title} ${newMatch.id}</p>
+                    <p class="match-title">${newMatch.title}</p>
                     <p class="match-date">${newMatch.date} ${newMatch.Time}</p>
                 </div>
             </div>
