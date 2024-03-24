@@ -413,11 +413,21 @@ html,body{
   }
   @media (max-width: 500px) {
     .home-tab{
+      height: 250px;
+    }
+  }
+  @media (max-width: 450px) {
+    .home-tab{
       height: 200px;
     }
   }
-  @media (max-width: 370px) {
+  @media (max-width: 360px) {
     .home-tab{
       height: 150px;
+    }
+  }
+  @media (max-width: 275px) {
+    .home-tab{
+      height: 100px;
     }
   }
