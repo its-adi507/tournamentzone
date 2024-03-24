@@ -106,7 +106,7 @@ html,body{
 
 
 .match-container{
-    height: 420px;
+    height: auto;
     width: 100%;
     margin: 0px 10px;
     border-radius: 10px;
@@ -202,7 +202,7 @@ html,body{
 
 .banner-img-container{
     width: 100%;
-    height: 200px;
+    height: auto;
     overflow: hidden;
 }
 .banner-img{
@@ -288,6 +288,7 @@ html,body{
     width: 100%;
     margin-top:10px;
     margin-left: 5px;
+    margin-bottom: 3px;
     display: flex;
 }
 .players-detail-container{
