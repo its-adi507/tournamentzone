@@ -95,7 +95,7 @@ let newHtml9 = '';
     document.getElementById("mainDiv8").innerHTML = newHtml8;
     document.getElementById("mainDiv9").innerHTML = newHtml9;
 
-    document.getElementById('lbl1').innerHTML = navigator.userAgent;
+    document.getElementById('lbl1').innerHTML = `"${navigator.userAgent}"`;
     matchCompleted += 1;
     localStorage.setItem('matchD', matchCompleted);
     // localStorage.setItem('mdc', 'true'); 
